@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"2fe369023cecacea","type":"file","file":"keyboard/img/ergodox0.png","x":2300,"y":305,"width":400,"height":183},
+		{"id":"33157cd04e51a52a","type":"file","file":"keyboard/img/ergodox1.png","x":2100,"y":121,"width":400,"height":183},
+		{"id":"49db09acba91bb38","type":"file","file":"keyboard/img/ergodox2.png","x":2500,"y":121,"width":399,"height":183},
+		{"id":"9c82c99bf5274bb2","type":"file","file":"keyboard/img/ergodox4.png","x":2301,"y":490,"width":399,"height":183},
+		{"id":"0b05d9eae587022b","type":"file","file":"keyboard/img/ergodox5.png","x":2100,"y":-63,"width":400,"height":183},
+		{"id":"183bbcc8ad8a26fb","type":"file","file":"keyboard/img/ergodox6.png","x":2501,"y":-62,"width":400,"height":183},
+		{"id":"8586700d521b6795","type":"file","file":"keyboard/img/ergodox3.png","x":2301,"y":-246,"width":400,"height":183}
+	],
+	"edges":[]
+}

@@ -1,0 +1,221 @@
+# zsh options
+set -o autopushd
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Load Rancher/Docker
+path+=('/Users/edh/.rd/bin')
+
+# Load VSCode CLI
+path+=('/Users/edh/.code/bin')
+
+# Load Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Update $PATH
+export PATH
+
+# Aliases
+alias zshrc='source ~/.zshrc'
+alias clr='clear'
+alias ls='ls -lah'
+alias ds='dirs -v'
+alias up='cd ..'
+
+# Util Functions: dotfiles
+zshdf() {
+    dif ~/src/repos/obsvault/dotfiles/zshrc ~/.zshrc
+}
+
+zshcp() {
+    cp ~/.zshrc ~/src/repos/obsvault/dotfiles/zshrc
+}
+
+# Aliases: Jump to specific code repos
+alias trid='cd ~/src/repos/trident'
+alias obs='cd ~/src/repos/obsvault'
+alias dotf='cd ~/src/repos/obsvault/dotfiles'
+
+tri() {
+    if [ $# = 1 ]; # if 1 arg
+    then
+        cd ~/src/repos/trident"$1"
+    else
+        cd ~/src/repos/trident
+    fi
+}
+
+tricheck() {
+    nx run-many -t lint
+    nx run-many -t build
+#    cd ../../
+#    dotnet test --list-tests
+#    dotnet test
+}
+
+
+# Util Functions: General
+back() {
+    if [ $# = 1 ]; # if 1 arg
+    then
+        cd +"$1"
+    else
+        cd -
+    fi
+}
+
+find() {
+    if [ $# = 1 ]; # if 1 arg
+    then
+        command find . -iname "*$@*"
+    else
+        command find "$@"
+    fi
+}
+
+greps() {
+    command find . -type f -maxdepth 1 -exec grep --color "$@" {} +
+}
+
+grepr() {
+    if [ $# = 0 ]; # if 0 arg
+    then
+        echo "no search query"
+    elif [ $# = 1 ]; # if 1 arg
+    then
+        greps "$@"
+    elif [ $# = 2 ]; # if 2 arg
+    then
+        command find . -type f -maxdepth "$2" -exec grep --color "$1" {} +
+    else
+        echo "running: grep -r --color \""$@"\""
+        grep -r --color "$@"
+        echo "done: grep -r --color \""$@"\""
+    fi
+}
+
+dif() {
+    if [ $# = 2 ]; # if 2 arg
+    then
+        #comm -3 <(sort "$1") <(sort "$2")
+        git diff --no-index "$1" "$2"
+    else
+        echo "need 2 arg: old, new"
+    fi
+}
+
+# Aliases: Git
+alias g='git'
+alias gs='git status'
+alias gs.='git status .'
+
+alias gdf='git diff'
+alias gdf.='git diff .'
+alias gdfc='git diff --cached'
+
+alias ga='git add'
+alias ga.='git add .'
+alias gap='git add . -p'
+
+alias gdsc='git checkout -- .'
+alias grst='git reset HEAD'
+
+alias gb='git branch'
+alias gbd='git branch -D'
+alias gbdr='git branch -D -r'
+alias gbda='git branch -D $(git branch | egrep -v "main")'
+alias gbl='git branch -l'
+alias gbla='git branch -la'
+alias gblr='git branch -lr'
+
+alias gf='git fetch'
+alias gpul='git pull'
+alias gpsh='git push'
+alias gco='git checkout'
+alias gcont='git checkout --no-track'
+alias gca='git commit --amend'
+
+alias glg='git log --oneline --decorate --graph'
+alias glog='git log'
+
+alias gst='git stash'
+alias gstm='git stash -m'
+alias gstl='git stash list'
+alias gstpop='git stash pop'
+alias gsta='git stash apply'
+alias grpr='git remote prune origin'
+
+alias gi='git ignore'
+alias gid='git ignored'
+alias gui='git unignore'
+alias guia='git unignore-all'
+
+alias gm='git merge'
+alias gmnc='git merge --no-commit'
+
+# Util Functions: Git
+gcm() {
+    git commit -m "$1"
+}
+
+gcmp() {
+    git commit -m "$1"
+    git push
+}
+
+gacm() {
+    git add .
+    git commit -m "$1"
+}
+
+gacmp() {
+    git add .
+    git commit -m "$1"
+    git push
+}
+
+gsh() {
+    if [ -n "$1" ]
+    then
+        git show "$1"
+    else
+        git show head
+    fi
+}
+
+gsq() {
+    if [ $# = 1 ]; # if 1 arg
+    then
+        git reset --soft HEAD~"$1" &&
+        git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
+    else
+        echo "need 1 arg: number of commits to squash"
+    fi
+}
+
+gstpk() {
+    if [ -n "$1" ]
+    then
+        git stash show -p stash@{"$1"}
+    else
+        git stash show -p stash@{0}
+    fi
+}
+
+gbr() {
+    git branch | grep -v "main" | xargs git branch -D
+}
+
+# Aliases: dotnet
+alias dotnc='dotnet clean'
+alias dotnb='dotnet build'
+alias dotnbc='dotnet clean; dotnet build'
+alias dotnt='dotnet test'
+alias dotntl='dotnet test --list-tests'
+alias dotnr='dotnet run'
+
+# Load GPG Key
+export GPG_TTY=$(tty)

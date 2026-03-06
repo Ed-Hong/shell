@@ -1,0 +1,95 @@
+" theme
+syntax enable
+set background=dark
+colorscheme Base2Tone_SeaDark
+"colorscheme solarized
+"colorscheme monokai
+hi Normal guibg=NONE ctermbg=NONE
+
+" settings
+set hlsearch
+set ignorecase
+set smartcase
+set number
+set clipboard=unnamed
+
+" tabs
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" remap <leader> to , instead of \
+"let mapleader = ","
+
+" save macro (map to emulator hotkey)
+nmap <F6> :w<CR>
+imap <F6> <Esc>:w<CR>a
+vmap <F6> <Esc>:w<CR>gv
+
+" save and quit macro
+nmap <F6>q :wq<CR>
+imap <F6>q <Esc>:wq<CR>
+vmap <F6>q <Esc>:wq<CR>
+
+" fast force quit
+nmap <leader>q :q!<CR>
+imap <leader>q <Esc>:q!<CR>
+vmap <leader>q <Esc>:q!<CR>
+
+" toggle line numbers
+nmap <leader>n :set number!<CR><Esc>
+
+" toggle whitespace characters
+nmap <leader>w :set list! listchars=tab:»·,trail:·,eol:¶<CR><Esc>
+
+" deletes all trailing whitespace
+nmap <leader>t :%s/\s\+$//e<CR><Esc>
+
+" deletes all leading whitespace
+nmap <leader>l :%le<CR><Esc>
+
+" deletes all whitespace lines
+nmap <leader>ll :v/\S/d<CR><Esc>
+
+" pressing tab in normal mode adds a tab
+nmap <tab> >>
+
+" pressing shift tab in normal mode removes a tab
+nmap <S-tab> <<
+
+" pressing shift tab in insert mode removes a tab
+imap <S-tab> <Esc><<i
+
+" pressing tab in visual mode adds a tab
+vmap <tab> >
+
+" pressing shift tab in visual mode removes a tab
+vmap <S-tab> <
+
+" inserts matching parenthesis, bracket, etc
+inoremap {<CR> {<CR>}<Esc>ko
+inoremap [<CR> [<CR>]<Esc>ko
+inoremap (<CR> (<CR>)<Esc>ko
+
+" / in visual mode searches for current selection
+vnoremap / y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" r in visual mode prompts to replace all for current selection
+vnoremap r :s/\%Vfoo/bar/gc
+
+" sorround the visual selection with the specified characters
+vnoremap ( <Esc>`>a)<Esc>`<i(<Esc>
+vnoremap [ <Esc>`>a]<Esc>`<i[<Esc>
+vnoremap { <Esc>`>a}<Esc>`<i{<Esc>
+vnoremap " <Esc>`>a"<Esc>`<i"<Esc>
+vnoremap ' <Esc>`>a'<Esc>`<i'<Esc>
+
+" sorround the visual selection with five newlines
+"vnoremap l <Esc>`>5o<Esc>`<5O<Esc>
+
+" replace all
+let @r=":%s/foo/bar/gc"
+
+" grep
+let @g=":%g/foo/p"

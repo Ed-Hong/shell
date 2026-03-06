@@ -1,0 +1,36 @@
+[alias]
+  ignore = update-index --assume-unchanged
+  unignore = update-index --no-assume-unchanged
+  ignored = !git ls-files -v | grep "^[[:lower:]]"
+  unignore-all = !git unignore $(git ignored | awk '{print $2}')
+  s = status
+  df = diff
+  dfc = diff --cached
+  a = add
+  dsc = checkout --
+  rst = reset HEAD
+  cm = "!git commit -m \"$1\" #"
+  b = branch
+  bl = branch -l
+  bla = branch -la
+  co = checkout
+  f = fetch
+  psh = push
+  pul = pull
+  glog = log --oneline --decorate --graph
+  pk = stash show -p stash@{0}
+  peek = "!git stash show -p stash@{\"$1\"} #"
+
+[user]
+    name = Ed Hong
+    email = ???
+    signingkey = ???
+
+[push]
+    autoSetupRemote = true
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgSign = true

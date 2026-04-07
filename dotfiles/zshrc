@@ -110,7 +110,8 @@ dif() {
 }
 
 mkdirp() {
-    mkdir -p "$(dirname "$1")" && touch "$1";
+    mkdir -p "$(dirname "$1")" && touch "$1"
+    vim "$1"
 }
 
 # Aliases: Git

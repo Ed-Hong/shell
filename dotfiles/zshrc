@@ -18,6 +18,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Update $PATH
 export PATH
 
+# Load GPG key for signing git commits
+export GPG_TTY=$(tty)
+
 # Aliases
 alias zshrc='source ~/.zshrc'
 alias clr='clear'
@@ -55,7 +58,6 @@ tricheck() {
 #    dotnet test --list-tests
 #    dotnet test
 }
-
 
 # Util Functions: General
 back() {
@@ -105,6 +107,10 @@ dif() {
     else
         echo "need 2 arg: old, new"
     fi
+}
+
+mkdirp() {
+    mkdir -p "$(dirname "$1")" && touch "$1";
 }
 
 # Aliases: Git
@@ -217,5 +223,4 @@ alias dotnt='dotnet test'
 alias dotntl='dotnet test --list-tests'
 alias dotnr='dotnet run'
 
-# Load GPG Key
-export GPG_TTY=$(tty)
+

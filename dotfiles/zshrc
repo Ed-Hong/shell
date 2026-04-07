@@ -24,7 +24,7 @@ export GPG_TTY=$(tty)
 # Aliases
 alias zshrc='source ~/.zshrc'
 alias clr='clear'
-alias ls='ls -lah'
+alias ls='ls -lah --color'
 alias ds='dirs -v'
 alias up='cd ..'
 

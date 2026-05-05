@@ -25,6 +25,8 @@ export GPG_TTY=$(tty)
 alias zshrc='source ~/.zshrc'
 alias clr='clear'
 alias ls='ls -lah --color'
+alias lsd='ls -d */'
+alias lsf='ls -l | grep ^-'
 alias ds='dirs -v'
 alias up='cd ..'
 
@@ -125,7 +127,8 @@ alias gdfc='git diff --cached'
 
 alias ga='git add'
 alias ga.='git add .'
-alias gap='git add . -p'
+alias gap='git add -p'
+alias gap.='git add -p .'
 
 alias gdsc='git checkout -- .'
 alias grst='git reset HEAD'

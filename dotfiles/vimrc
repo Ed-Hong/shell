@@ -96,10 +96,15 @@ let @g=":g/foo/p"
 
 
 " # formatting obsidian notes
-" ## timestamps: 0000 => **00:00**
+"
+" ## timestamps: 0000, 00:00 => **00:00**
 function! FormatTimestamps()
+    "0000, 000
     %s/^\([0-9]\{2\}\)\([0-9]\{2\}\)/\*\*\1:\2\*\*/ge
     %s/^\([0-9]\)\([0-9]\{2\}\)/\*\*\1:\2\*\*/ge
+    "00:00, 0:00
+    %s/^\([0-9]\{2\}\):\([0-9]\{2\}\)/\*\*\1:\2\*\*/ge
+    %s/^\([0-9]\):\([0-9]\{2\}\)/\*\*\1:\2\*\*/ge
 endfunction
 command! FormatTimestamps call FormatTimestamps()
 "nnoremap <leader>ft :call FormatTimestamps()<CR>

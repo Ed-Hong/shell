@@ -89,7 +89,34 @@ vnoremap ' <Esc>`>a'<Esc>`<i'<Esc>
 "vnoremap l <Esc>`>5o<Esc>`<5O<Esc>
 
 " replace all
-let @r=":%s/foo/bar/gc"
+let @r=":s/foo/bar/gc"
 
 " grep
-let @g=":%g/foo/p"
+let @g=":g/foo/p"
+
+
+" # formatting obsidian notes
+" ## timestamps: 0000 => **00:00**
+function! FormatTimestamps()
+    %s/^\([0-9]\{2\}\)\([0-9]\{2\}\)/\*\*\1:\2\*\*/ge
+    %s/^\([0-9]\)\([0-9]\{2\}\)/\*\*\1:\2\*\*/ge
+endfunction
+command! FormatTimestamps call FormatTimestamps()
+"nnoremap <leader>ft :call FormatTimestamps()<CR>
+
+" ## whitespace: no trailing whitespace; no blank lines
+function! CleanWhitespace()
+    %s/\s\+$//e
+    %s/^\s*$\n//e
+endfunction
+command! CleanWhitespace call CleanWhitespace()
+"nnoremap <leader>cw :call CleanWhitespace()<CR>
+
+" ## combined macro
+function! FormatNotes()
+    FormatTimestamps
+    CleanWhitespace
+endfunction
+command! FormatNotes call FormatNotes()
+nnoremap <leader>f :call FormatNotes()<CR>
+

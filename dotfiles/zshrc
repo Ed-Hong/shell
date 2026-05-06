@@ -130,7 +130,8 @@ alias ga.='git add .'
 alias gap='git add -p'
 alias gap.='git add -p .'
 
-alias gdsc='git checkout -- .'
+alias gdsc='git checkout --'
+alias gdsc.='git checkout -- .'
 alias grst='git reset HEAD'
 
 alias gb='git branch'

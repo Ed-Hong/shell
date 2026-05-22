@@ -120,7 +120,7 @@ command! CleanWhitespace call CleanWhitespace()
 " ## combined macro
 function! FormatNotes()
     FormatTimestamps
-    CleanWhitespace
+    "CleanWhitespace
 endfunction
 command! FormatNotes call FormatNotes()
 nnoremap <leader>f :call FormatNotes()<CR>
